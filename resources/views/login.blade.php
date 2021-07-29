@@ -22,9 +22,7 @@
         <form action="login" method="POST">
             @csrf
 
-            @if ($message = Session::get('emailFail'))
-                <p class="text-danger">{{ $message }}</p>
-            @endif
+            
 
             @if ($message = Session::get('error'))
                 <p class="text-danger">{{ $message }}</p>
@@ -32,10 +30,13 @@
 
 
             <div class="form-group">
+               
                 <label for="email">Email address</label>
                 <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
                 placeholder="Enter email" value="{{ old('email') }}">
-
+                @if ($message = Session::get('emailFail'))
+                    <p class="text-danger">{{ $message }}</p>
+                @endif
                 @error('email')
                     <div class="alert alert-danger" role="alert">
                         {{ $message }}
@@ -46,10 +47,11 @@
 
             </div>
 
-            @if ($message = Session::get('passFail'))
-                <p class="text-danger">{{ $message }}</p>
-            @endif
+            
             <div class="form-group">
+                @if ($message = Session::get('passFail'))
+                    <p class="text-danger">{{ $message }}</p>
+                @endif
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password"
                 placeholder="Password" value="{{ old('password') }}">
